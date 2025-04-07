@@ -31,7 +31,7 @@ conda create --name object_detection_amb python=3.10  # specify the Python versi
 conda activate object_detection_amb
 pip install -r requirements.txt
 ```
-Estrutura do Projeto
+## Estrutura do Projeto
 
     run_sam2.py: Script principal que executa o pipeline de segmentação utilizando o SAM2.
 
@@ -44,8 +44,9 @@ Estrutura do Projeto
         /home/nexus/sam2/sam2/datasets/giovanna/images/default: Diretório com os frames do vídeo.
 
         Diretórios de output para salvar os frames processados, máscaras e o arquivo JSON com as anotações.
-
-Como Utilizar
+        
+        
+## Como Utilizar
 
     Configure os Caminhos:
     Verifique e atualize os caminhos para os arquivos de anotações, diretório dos frames, checkpoint do modelo e arquivo de configuração no script run_sam2.py, conforme seu ambiente de execução.
@@ -68,7 +69,7 @@ python run_sam2.py
 
         Arquivo JSON contendo as anotações formatadas segundo o padrão COCO.
 
-Funcionamento do Código
+## Funcionamento do Código
 
 O pipeline está organizado em diversas etapas, conforme descrito a seguir:
 
@@ -93,7 +94,7 @@ O pipeline está organizado em diversas etapas, conforme descrito a seguir:
     Salvamento dos Resultados:
     São gerados os frames com sobreposição das máscaras, as máscaras isoladas e um arquivo JSON com as anotações, salvos nos respectivos diretórios de output.
 
-Notas e Considerações
+## Notas e Considerações
 
     Performance:
     A utilização de uma GPU com suporte a CUDA é recomendada para acelerar o processamento. Caso o dispositivo utilize CPU, o processamento poderá ser significativamente mais lento.
@@ -104,6 +105,6 @@ Notas e Considerações
     Ajuste e Debug:
     As funções de visualização ajudam na verificação e depuração dos resultados. Sinta-se à vontade para modificar o código conforme necessário para melhor atender às suas necessidades.
 
-Contato
+## Contato
 
 Em caso de dúvidas ou sugestões, abra uma issue no repositório ou entre em contato. Contribuições para melhorias são sempre bem-vindas!
