@@ -1,16 +1,18 @@
 # SAM2 Video Segmentation
+
 <h2>Resultado da Segmentação</h2>
 
-<div style="display: flex; justify-content: center; gap: 20px;">
-  <div>
-    <p style="text-align: center;"><strong>Frame Original</strong></p>
-    <img src="../dataset/mn01/output/images_output/frame_12.png" alt="Frame Original" width="300">
+<div style="display: flex; justify-content: center; gap: 40px; align-items: center;">
+  <div style="text-align: center;">
+    <p><strong>Frame Original</strong></p>
+    <img src="../dataset/mn01/output/images_output/frame_12.png" alt="Frame Original" width="350">
   </div>
-  <div>
-    <p style="text-align: center;"><strong>Máscara Aplicada</strong></p>
-    <img src="../dataset/mn01/output/mask_output/mask_12.png" alt="Máscara Aplicada" width="300">
+  <div style="text-align: center;">
+    <p><strong>Máscara Aplicada</strong></p>
+    <img src="../dataset/mn01/output/mask_output/mask_12.png" alt="Máscara Aplicada" width="350">
   </div>
 </div>
+
 
 Este projeto implementa a segmentação de vídeos utilizando o modelo **SAM2**. O código realiza o processamento de frames (imagens) extraídas de vídeos, aplica segmentação dos objetos de interesse e salva os resultados em formato COCO, com anotações e máscaras sobrepostas.
 
