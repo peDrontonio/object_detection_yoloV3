@@ -55,7 +55,8 @@ Como Utilizar
 
 ```bash 
 python run_sam2.py
-```bash 
+``` 
+
     Durante a execução, o código exibirá informações sobre a disponibilidade da GPU e exibirá os frames com as máscaras para verificação.
 
     Verifique os Resultados:
