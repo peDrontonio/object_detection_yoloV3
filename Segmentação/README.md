@@ -1,4 +1,6 @@
 # SAM2 Video Segmentation
+![](/home/pedrinho/object_detection_yoloV3/dataset/mn01/output/images_output/frame_0.png)
+Exemplo de imagem anotada utilizando o `run_sum2.py`
 
 Este projeto implementa a segmentação de vídeos utilizando o modelo **SAM2**. O código realiza o processamento de frames (imagens) extraídas de vídeos, aplica segmentação dos objetos de interesse e salva os resultados em formato COCO, com anotações e máscaras sobrepostas.
 
