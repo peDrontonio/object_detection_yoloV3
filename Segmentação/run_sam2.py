@@ -295,7 +295,7 @@ for out_frame_idx, frame_path in enumerate(frame_names):
 with open(coco_annotations_path, "w") as f:
     json.dump(coco_annotations, f, indent=4)
 
-print(" TEverthing save")
+print("Everthing save")
 #%%
 
 
