@@ -1,18 +1,5 @@
 # SAM2 Video Segmentation
-
-<h2>Resultado da Segmentação</h2>
-
-<div style="display: flex; justify-content: center; gap: 40px; align-items: center;">
-  <div style="text-align: center;">
-    <p><strong>Frame Original</strong></p>
-    <img src="../dataset/mn01/output/images_output/frame_12.png" alt="Frame Original" width="350">
-  </div>
-  <div style="text-align: center;">
-    <p><strong>Máscara Aplicada</strong></p>
-    <img src="../dataset/mn01/output/mask_output/mask_12.png" alt="Máscara Aplicada" width="350">
-  </div>
-</div>
-
+![Exemplo de Segmentação](../dataset/mn01/output/images_output/frame_12.png)
 
 Este projeto implementa a segmentação de vídeos utilizando o modelo **SAM2**. O código realiza o processamento de frames (imagens) extraídas de vídeos, aplica segmentação dos objetos de interesse e salva os resultados em formato COCO, com anotações e máscaras sobrepostas.
 
@@ -47,7 +34,16 @@ pip install -r requirements.txt
 ```
 ## Estrutura do Projeto
 
-- **run_sam2.py:** Script principal que executa o pipeline de segmentação utilizando o SAM2.
+- **run_## Descrição do Projeto
+
+O pipeline de segmentação desenvolvido neste projeto realiza as seguintes etapas:
+
+- **Pré-processamento dos Frames:** Lista e organiza os arquivos de imagem de um vídeo, padronizando seus nomes para manter a sequência correta.
+- **Configuração do Ambiente:** Define o dispositivo de computação (GPU com CUDA, MPS em Macs ou CPU) e realiza ajustes de performance utilizando tipos de dados como bfloat16 e TF32.
+- **Instanciação do Preditor SAM2:** Carrega o checkpoint e arquivo de configuração para criar um objeto preditor responsável pela segmentação.
+- **Processamento das Máscaras:** Utiliza anotações no formato COCO para decodificar e aplicar as máscaras sobre os frames, utilizando técnicas como Run-Length Encoding (RLE).
+- **Propagação da Segmentação:** Propaga a segmentação para todos os frames do vídeo, armazenando os resultados em um dicionário.
+- **Visualização e Salvamento:** Exibe os resultados para verificação e, em seguida, salva os frames com sobreposição das máscaras, as imagens das máscaras isoladas e um asam2.py:** Script principal que executa o pipeline de segmentação utilizando o SAM2.
 
 - **Aula0(EXTRA).ipynb:** Notebook que contém uma explicação detalhada, célula a célula, do código utilizado.
 
