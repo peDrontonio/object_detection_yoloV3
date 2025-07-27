@@ -1,0 +1,32 @@
+# docker-compose.yml
+services:
+  synthetic:
+    build:
+      context: ../synthetic
+      dockerfile: ../docker/Dockerfile.blenderproc
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    image: petrobras_synthetic
+    container_name: synthetic_container
+    volumes:
+      - ../shared_data:/app/shared_data
+      - ../synthetic:/app
+    working_dir: /app
+    tty: true
+    command: ["bash"]
+
+  vision:
+    build:
+      context: ../VisionPipelineSuite
+      dockerfile: ../docker/Dockerfile.vision
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    image: petrobras_vision
+    container_name: vision_container
+    volumes:
+      - /home/pedrinho:/host-home
+      - /home/pedrinho/IC_Petrobras-Repositorio_4/shared_data:/app/shared_data
+      - /home/pedrinho/IC_Petrobras-Repositorio_4/VisionPipelineSuite:/app
+    working_dir: /app
+    tty: true
+    command: ["bash"]

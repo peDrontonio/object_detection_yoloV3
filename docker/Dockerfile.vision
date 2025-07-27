@@ -1,0 +1,37 @@
+# Dockerfile para a parte de visão do projeto YOLOv11 com PyTorch e CUDA 12.4
+FROM nvidia/cuda:12.4.0-runtime-ubuntu22.04
+
+# Instala dependências do sistema necessárias
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    python3-dev \
+    build-essential \
+    wget \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender1 \
+    libgstreamer1.0-0 \
+    gir1.2-gstreamer-1.0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Cria um link simbólico para o comando "python" apontar para "python3"
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# Define o diretório de trabalho (conforme solicitado, dentro de ICPETRO/projeto_petrobras)
+WORKDIR /home/pedrinho/IC_Petrobras-Repositorio_4/VisionPipelineSuite
+
+# Copia o arquivo requirements.txt para o diretório de trabalho
+COPY requirements.txt .
+
+# Atualiza o pip e instala as dependências Python conforme requirements.txt
+RUN python -m pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copia o restante dos arquivos da aplicação para dentro do container
+COPY . .
+
+# Comando padrão para iniciar a aplicação (ajuste conforme a sua estrutura – por exemplo, execute o script principal)
+CMD ["python", "main.py"]

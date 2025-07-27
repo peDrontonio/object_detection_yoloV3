@@ -1,0 +1,46 @@
+# Imagem base com Python 3.10 slim (compatível com o environment original)
+FROM nvidia/cuda:12.4.0-runtime-ubuntu22.04
+
+# Atualiza o apt-get e instala as dependências do sistema necessárias
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      python3 python3-pip python3-dev build-essential wget git \
+      libgl1-mesa-glx libxi6 libxrender1 xvfb \
+      # nvidia-utils vai fornecer nvidia-smi e libs de driver
+      nvidia-utils-525 && \
+    rm -rf /var/lib/apt/lists/*
+
+
+ENV CUDA_HOME=/usr/local/cuda
+ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+
+RUN apt-get update && apt-get install -y git
+
+RUN apt-get update && apt-get install -y libglib2.0-0 libxkbcommon0
+
+
+# Instala o Blender (versão 3.3.0 recomendada)
+RUN wget https://download.blender.org/release/Blender3.3/blender-3.3.0-linux-x64.tar.xz && \
+    tar -xf blender-3.3.0-linux-x64.tar.xz && \
+    mv blender-3.3.0-linux-x64 /opt/blender && \
+    rm blender-3.3.0-linux-x64.tar.xz
+
+# Adiciona o Blender ao PATH
+ENV PATH="/opt/blender:${PATH}"
+ENV GIT_PYTHON_GIT_EXECUTABLE=/usr/bin/git
+
+
+# Define o diretório de trabalho para a aplicação
+WORKDIR /IC_Petrobras-Repositorio_4/synthetic
+
+# Copia o arquivo requirements.txt para o diretório de trabalho
+COPY requirements.txt .
+
+# Instala as dependências Python a partir do requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o restante do código da aplicação para o container
+COPY . .
+
+# Comando padrão (ajuste conforme sua aplicação – aqui, por exemplo, exibe ajuda do blenderproc)
+CMD ["blenderproc", "--help"]
