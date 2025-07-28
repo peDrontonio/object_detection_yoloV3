@@ -7,13 +7,13 @@ from pathlib import Path
 from collections import Counter
 
 import pandas as pd
-from sklearn.model_selection import KFold
+from sklearn.model_selection import StratifiedKFold
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def split_data(images_dir, coco_json_path, output_dir, 
-               train_ratio=0.75, val_ratio=0.1, ablation=0, k=0, pose_estimation=False, 
+               train_ratio=0.75, val_ratio=0.1, ablation=0, k=0, pose_estimation=False,
                rename_images=False, classes=[]):
     """
     Splits a COCO dataset into training, validation, and testing sets or creates k-fold splits.
@@ -77,10 +77,18 @@ def create_kfold_splits_with_dataframe(images, annotations, categories, images_d
     labels_df = labels_df.fillna(0)  # Replace NaN values with 0
     logger.info("Class count DataFrame created.")
 
-    # Perform k-fold splitting
-    kfold = KFold(n_splits=k, shuffle=True, random_state=42)
+    logger.info("Creating stratification key...")
+    stratify_key = labels_df.apply(
+        lambda row: '_'.join(sorted(row[row > 0].index.astype(str))), 
+        axis=1
+    )
+    stratify_key[stratify_key == ''] = 'empty'
+    logger.info("Stratification key created.")
 
-    for fold, (train_idx, val_idx) in enumerate(kfold.split(labels_df)):
+    # Perform stratified k-fold splitting
+    skfold = StratifiedKFold(n_splits=k, shuffle=True, random_state=42) 
+
+    for fold, (train_idx, val_idx) in enumerate(skfold.split(labels_df, stratify_key)):
         fold_name = f"fold_{fold+1}"
         logger.info(f"Processing {fold_name}...")
 
