@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def split_data(images_dir, coco_json_path, output_dir, 
                train_ratio=0.75, val_ratio=0.1, ablation=0, k=0, pose_estimation=False,
-               rename_images=False, classes=[]):
+               rename_images=False, classes=[]): # trocar para k para k=5, ou qualquer outro numero que estiver pensando em fazer.
     """
     Splits a COCO dataset into training, validation, and testing sets or creates k-fold splits.
     """
